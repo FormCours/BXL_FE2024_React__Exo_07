@@ -1,4 +1,5 @@
 import TaskForm from "../../components/task-form/task-form";
+import TaskList from "../../components/task-list/task-list";
 
 export default function TodoApp() {
 
@@ -8,7 +9,7 @@ export default function TodoApp() {
             <TaskForm />
 
             <h2>Liste des taches</h2>
-            {/* La liste */}
+            <TaskList />
         </div>
     )
 } 
