@@ -1,4 +1,5 @@
 import { useActionState, useId } from "react";
+import { priorities } from "../../values/priority";
 
 const initialState = {
     data: null,
@@ -57,7 +58,11 @@ export default function TaskForm({ btnSubmitName = 'Valider', onSubmitCallback =
             <div>
                 <label htmlFor={inputId + '-priority'}>Priorité : </label>
                 <select id={inputId + '-priority'}
-                    name="priority" defaultValue={state.data?.priority}></select>
+                    name="priority" defaultValue={state.data?.priority}>
+                    {priorities.map(({ key, name }) => (
+                        <option value={key} key={key}>{name}</option>
+                    ))}
+                </select>
             </div>
             <div>
                 <button type="submit">{btnSubmitName}</button>
