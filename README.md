@@ -1,4 +1,4 @@
-# Exo 05 - Todo List
+# Exo 07 - Refactoring de la Todo List (Exo 05)
 
 ## Composant dans la correction
 - Header
@@ -19,3 +19,7 @@ Le composant "TodoApp" contiendra la liste des taches et il la manipulera.
   _TaskCard (callback)-> TaskList (callback) -> TodoApp_
 - **Valider une tache**  
   _TaskCard (callback)-> TaskList (callback) -> TodoApp_ 
+
+
+## Refactoring
+- Création d'un hook custom pour gérer les taches
