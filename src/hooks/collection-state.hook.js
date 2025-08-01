@@ -1,41 +1,41 @@
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export function useCollectionState() {
 
     const [items, setItems] = useState([]);
 
-    const add = (data) => {
+    const add = useCallback((data) => {
         const item = {
             ...data,
             id: nanoid()
         };
         setItems(prevItems => [...prevItems, item]);
-    };
+    }, []);
 
-    const remove = (id) => {
+    const remove = useCallback((id) => {
         setItems(prevItems =>
             prevItems.filter((item) => item.id !== id)
         );
-    };
+    }, []);
 
-    const modify = (id, updateCallback) => {
+    const modify = useCallback((id, updateCallback) => {
         setItems(prevItems =>
             prevItems.map((item) =>
                 item.id === id ? updateCallback(item) : item
             )
         );
-    };
+    }, []);
 
-    const clear = () => {
+    const clear = useCallback(() => {
         setItems([]);
-    };
+    }, []);
 
-    const removeIf = (conditionCallback) => {
+    const removeIf = useCallback((conditionCallback) => {
         setItems(prevItems =>
             prevItems.filter(item => conditionCallback(item))
         );
-    };
+    }, []);
 
     return [items, { add, remove, removeIf, modify, clear }];
 }
