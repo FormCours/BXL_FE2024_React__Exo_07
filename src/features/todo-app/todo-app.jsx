@@ -1,42 +1,34 @@
-import { nanoid } from "nanoid";
 import TaskForm from "../../components/task-form/task-form";
 import TaskList from "../../components/task-list/task-list";
-import { useState } from "react";
+import { useCollectionState } from "../../hooks/collection-state.hook";
 
 export default function TodoApp() {
 
-    const [tasks, setTasks] = useState([]);
+    const [tasks, actionTasks] = useCollectionState();
 
     const handleAddTask = (data) => {
         const task = {
-            id: nanoid(),
             name: data.name,
             desc: data.desc,
             priority: data.priority,
             isDone: false
-
         };
-        setTasks(prevTask => [...prevTask, task]);
-    };
-
-    const handleDeleteTask = (id) => {
-        setTasks(prevTask => prevTask.filter((element) => element.id !== id));
+        actionTasks.add(task);
     };
 
     const handleOnEndTask = (id) => {
-        setTasks(preview =>
-            preview.map((theTask) =>
-                theTask.id === id ? { ...theTask, isDone: true } : theTask
-            )
-        );
+        actionTasks.modify(id, (task) => ({ ...task, isDone: true }));
     };
+
     return (
         <div>
             <h2>Ajouter une tache</h2>
             <TaskForm onSubmitCallback={handleAddTask} />
 
             <h2>Liste des taches</h2>
-            <TaskList tasks={tasks} onDeleteCallback={handleDeleteTask} onEndCallback={handleOnEndTask} />
+            <TaskList tasks={tasks}
+                onDeleteCallback={actionTasks.delt}
+                onEndCallback={handleOnEndTask} />
         </div>
     );
 } 
