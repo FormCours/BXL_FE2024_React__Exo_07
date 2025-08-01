@@ -20,14 +20,20 @@ export default function TodoApp() {
         actionTasks.modify(id, (task) => ({ ...task, isDone: true }));
     };
 
+    const handleRemoveDoneTask = () => {
+        actionTasks.removeIf(task => !task.isDone);
+    }
+
     return (
         <div>
             <h2>Ajouter une tache</h2>
             <TaskForm onSubmitCallback={handleAddTask} />
 
             <h2>Liste des taches</h2>
+            <button onClick={actionTasks.clear}>Effacer tout</button>
+            <button onClick={handleRemoveDoneTask}>Effacer les taches terminées</button>
             <TaskList tasks={tasks}
-                onDeleteCallback={actionTasks.delt}
+                onDeleteCallback={actionTasks.remove}
                 onEndCallback={handleOnEndTask} />
         </div>
     );

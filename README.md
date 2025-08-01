@@ -23,3 +23,8 @@ Le composant "TodoApp" contiendra la liste des taches et il la manipulera.
 
 ## Refactoring
 - Création d'un hook custom pour gérer les taches
+- Ajouter des nouvelles fonctionnalitées (-> Hook)
+
+### Nouvelles fonctionnalitées
+- Ajouter un bouton qui efface toutes les taches
+- Ajouter un bouton qui permet d'effacer les taches terminées

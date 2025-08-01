@@ -13,7 +13,7 @@ export function useCollectionState() {
         setItems(prevItems => [...prevItems, item]);
     };
 
-    const delt = (id) => {
+    const remove = (id) => {
         setItems(prevItems =>
             prevItems.filter((item) => item.id !== id)
         );
@@ -27,5 +27,15 @@ export function useCollectionState() {
         );
     };
 
-    return [items, { add, delt, modify }];
+    const clear = () => {
+        setItems([]);
+    };
+
+    const removeIf = (conditionCallback) => {
+        setItems(prevItems =>
+            prevItems.filter(item => conditionCallback(item))
+        );
+    };
+
+    return [items, { add, remove, removeIf, modify, clear }];
 }
